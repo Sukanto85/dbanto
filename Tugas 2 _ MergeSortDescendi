@@ -4,13 +4,13 @@ import java.util.Arrays;
 
 public class MergeSortDescending {
 
-    // Metode utama untuk memulai proses pengurutan
+    // Metode utama untuk memulai proses pengurutan data
     public static void mergeSort(int[] arr, int left, int right) {
         if (left < right) {
-            // Temukan titik tengah array
+            // Menentukan titik tengah dari array
             int mid = left + (right - left) / 2;
 
-            // Urutkan dua bagian secara rekursif
+            // Mengurutkan dua bagian secara rekursif
             mergeSort(arr, left, mid);
             mergeSort(arr, mid + 1, right);
 
@@ -75,7 +75,7 @@ public class MergeSortDescending {
 
     public static void main(String[] args) {
         // Tentukan nilai variabel (minimal 8 elemen)
-        int[] data = { 40, 32, 39, 10, 13, 56, 35, 50 };
+        int[] data = { 25, 12, 80, 5, 42, 10, 55, 30 };
 
         System.out.println("Array sebelum diurutkan:");
         printArray(data);
