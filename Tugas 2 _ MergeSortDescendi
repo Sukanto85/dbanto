@@ -1,0 +1,90 @@
+package Tugas_02;
+
+import java.util.Arrays;
+
+public class MergeSortDescending {
+
+    // Metode utama untuk memulai proses pengurutan
+    public static void mergeSort(int[] arr, int left, int right) {
+        if (left < right) {
+            // Temukan titik tengah array
+            int mid = left + (right - left) / 2;
+
+            // Urutkan dua bagian secara rekursif
+            mergeSort(arr, left, mid);
+            mergeSort(arr, mid + 1, right);
+
+            // Gabungkan kedua bagian yang sudah diurutkan
+            merge(arr, left, mid, right);
+        }
+    }
+
+    // Metode untuk menggabungkan dua sub-array
+    private static void merge(int[] arr, int left, int mid, int right) {
+        // Ukuran dari dua sub-array yang akan digabungkan
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        // Buat array sementara untuk menyimpan sub-array
+        int[] L = new int[n1];
+        int[] R = new int[n2];
+
+        // Salin data ke array sementara
+        for (int i = 0; i < n1; ++i)
+            L[i] = arr[left + i];
+        for (int j = 0; j < n2; ++j)
+            R[j] = arr[mid + 1 + j];
+
+        // Gabungkan kembali array sementara ke arr[].
+        // Mulai dari indeks awal dari dua sub-array.
+        int i = 0, j = 0;
+        int k = left;
+
+        // Pengurutan dari terbesar ke terkecil: bandingkan elemen dari L dan R
+        // dan ambil yang lebih besar untuk ditempatkan pertama di array hasil.
+        while (i < n1 && j < n2) {
+            if (L[i] >= R[j]) { // Perubahan kunci: >= untuk urutan descending
+                arr[k] = L[i];
+                i++;
+            } else {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        // Salin elemen yang tersisa dari L[], jika ada
+        while (i < n1) {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+
+        // Salin elemen yang tersisa dari R[], jika ada
+        while (j < n2) {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
+    }
+
+    // Metode untuk mencetak array
+    public static void printArray(int arr[]) {
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static void main(String[] args) {
+        // Tentukan nilai variabel (minimal 8 elemen)
+        int[] data = { 40, 32, 39, 10, 13, 56, 35, 50 };
+
+        System.out.println("Array sebelum diurutkan:");
+        printArray(data);
+
+        // Panggil metode mergeSort untuk mengurutkan
+        mergeSort(data, 0, data.length - 1);
+
+        System.out.println("Array setelah diurutkan (terbesar ke terkecil):");
+        printArray(data);
+    }
+}
+
