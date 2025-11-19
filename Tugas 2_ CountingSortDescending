@@ -1,0 +1,55 @@
+package Tugas_02;
+
+import java.util.Arrays;
+
+public class CountingSortDescending {
+
+    public static void countingSort(int[] arr) {
+        // 1. Tentukan nilai maksimum untuk menentukan ukuran array count.
+        int max = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+        // Gunakan max+1 sebagai ukuran array count karena nilai akan diindeks dari 0 sampai max.
+        int[] count = new int[max + 1];
+
+        // 2. Hitung frekuensi kemunculan setiap elemen dan simpan di array count.
+        for (int i = 0; i < arr.length; i++) {
+            count[arr[i]]++;
+        }
+
+        // 3. Ubah array count untuk menyimpan posisi akhir dari setiap elemen.
+        for (int i = 1; i <= max; i++) {
+            count[i] += count[i - 1];
+        }
+
+        // 4. Buat array output.
+        int[] output = new int[arr.length];
+
+        // 5. Isi array output dengan elemen yang sudah terurut dari besar ke kecil.
+        // Iterasi dari belakang untuk mendapatkan urutan terbalik (besar ke kecil).
+        for (int i = arr.length - 1; i >= 0; i--) {
+            output[count[arr[i]] - 1] = arr[i];
+            count[arr[i]]--;
+        }
+
+        // 6. Salin elemen dari array output kembali ke array asli.
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = output[i];
+        }
+    }
+
+    public static void main(String[] args) {
+        // Tentukan nilai untuk variabel (minimal 8 elemen)
+        int[] data = {40, 32, 39, 10, 13, 56, 35, 50};
+
+        System.out.println("Data sebelum diurutkan: " + Arrays.toString(data));
+
+        // Panggil metode countingSort
+        countingSort(data);
+
+        System.out.println("Data setelah diurutkan (terbesar ke terkecil): " + Arrays.toString(data));
+    }
+}
