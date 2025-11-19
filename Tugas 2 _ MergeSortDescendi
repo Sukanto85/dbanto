@@ -1,27 +1,29 @@
 package Tugas_02;
 
 import java.util.Arrays;
-
 public class MergeSortDescending {
 
-    // Metode utama untuk memulai proses pengurutan data
+    // Berfungsi untuk memulai proses pengurutan data
     public static void mergeSort(int[] arr, int left, int right) {
         if (left < right) {
-            // Menentukan titik tengah dari array
+
+            // Untuk menentukan titik tengah dari array
             int mid = left + (right - left) / 2;
 
-            // Mengurutkan dua bagian secara rekursif
+            // Untuk mengurutkan dua bagian
             mergeSort(arr, left, mid);
             mergeSort(arr, mid + 1, right);
 
-            // Gabungkan kedua bagian yang sudah diurutkan
+            // Menggabungkan kedua bagian yang sudah diurutkan
             merge(arr, left, mid, right);
         }
     }
 
-    // Metode untuk menggabungkan dua sub-array
+
+    // Berfungsi untuk menggabungkan dua sub-array
     private static void merge(int[] arr, int left, int mid, int right) {
-        // Ukuran dari dua sub-array yang akan digabungkan
+
+        // Untuk mengukur dari dua sub-array yang akan digabungkan
         int n1 = mid - left + 1;
         int n2 = right - mid;
 
@@ -29,21 +31,20 @@ public class MergeSortDescending {
         int[] L = new int[n1];
         int[] R = new int[n2];
 
-        // Salin data ke array sementara
+        // Menyalin data ke array sementara
         for (int i = 0; i < n1; ++i)
             L[i] = arr[left + i];
         for (int j = 0; j < n2; ++j)
             R[j] = arr[mid + 1 + j];
 
-        // Gabungkan kembali array sementara ke arr[].
-        // Mulai dari indeks awal dari dua sub-array.
+        // Menggabungkan kembali array sementara ke arr[] dan mulai dari index awal
         int i = 0, j = 0;
         int k = left;
 
-        // Pengurutan dari terbesar ke terkecil: bandingkan elemen dari L dan R
+        // Berfungsi untuk mengurutan dari terbesar ke terkecil dan membandingkan elemen L dan R, 
         // dan ambil yang lebih besar untuk ditempatkan pertama di array hasil.
         while (i < n1 && j < n2) {
-            if (L[i] >= R[j]) { // Perubahan kunci: >= untuk urutan descending
+            if (L[i] >= R[j]) { 
                 arr[k] = L[i];
                 i++;
             } else {
@@ -53,14 +54,14 @@ public class MergeSortDescending {
             k++;
         }
 
-        // Salin elemen yang tersisa dari L[], jika ada
+        // Menyalin elemen yang tersisa dari L[], jika ada
         while (i < n1) {
             arr[k] = L[i];
             i++;
             k++;
         }
 
-        // Salin elemen yang tersisa dari R[], jika ada
+        // Menyalin elemen yang tersisa dari R[], jika ada
         while (j < n2) {
             arr[k] = R[j];
             j++;
@@ -68,21 +69,23 @@ public class MergeSortDescending {
         }
     }
 
-    // Metode untuk mencetak array
+    // Berfungsi untuk mencetak array
     public static void printArray(int arr[]) {
         System.out.println(Arrays.toString(arr));
     }
 
     public static void main(String[] args) {
-        // Tentukan nilai variabel (minimal 8 elemen)
-        int[] data = { 25, 12, 80, 5, 42, 10, 55, 30 };
+        // Tentukan nilai variabel 8 elemen
+        int[] data = { 25, 12, 80, 5, 42, 10, 55, 30 }; 
 
+        // Menampilkan nilai variable yang belum diurutkan
         System.out.println("Array sebelum diurutkan:");
         printArray(data);
 
-        // Panggil metode mergeSort untuk mengurutkan
+        // Panggil metode mergeSort untuk mengurutkan nilai variabel
         mergeSort(data, 0, data.length - 1);
 
+         // Menampilkan nilai variable yang sudah diurutkan
         System.out.println("Array setelah diurutkan (terbesar ke terkecil):");
         printArray(data);
     }
