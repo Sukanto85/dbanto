@@ -1,7 +1,7 @@
 package Tugas_02;
 
 import java.util.Arrays;
-public class MergeSortDescending {
+public class MergeSort {
 
     // Berfungsi untuk memulai proses pengurutan data
     public static void mergeSort(int[] arr, int left, int right) {
